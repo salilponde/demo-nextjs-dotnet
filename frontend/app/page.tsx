@@ -13,8 +13,8 @@ export default function Home() {
   // });
 
   return (
-	<h1>Welcome</h1>
     <div>
+	  <h1>Welcome</h1>
       <ul>
         {users.map(item => <li key={item.email}>{item.email}</li>)}
       </ul>
