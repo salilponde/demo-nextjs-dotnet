@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <div>
       <ul>
-        {users.map(item => <li>{item.email}</li>)}
+        {users.map(item => <li key={item.email}>{item.email}</li>)}
       </ul>
     </div>
   )
