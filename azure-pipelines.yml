@@ -16,20 +16,32 @@ steps:
     modifyOutputPath: true
     
 - task: PublishBuildArtifacts@1
+  displayName: 'Publish Backend Artifact'
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)/Output'
     ArtifactName: 'backend'
     publishLocation: 'Container'
     
 - task: NodeTool@0
+  displayName: 'Install NodeJS'
   inputs:
     versionSource: 'spec'
     versionSpec: '18.12.0'
     
 - task: Bash@3
+  displayName: 'Build Frontend'
   inputs:
     targetType: 'inline'
     script: |
       npm install
-      npm build
+      npm run build
     workingDirectory: 'frontend'
+    
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Frontend Artifact'
+  inputs:
+    PathtoPublish: 'frontend/output'
+    ArtifactName: 'frontend'
+    publishLocation: 'Container'
+
+    
