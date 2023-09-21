@@ -35,13 +35,14 @@ steps:
     script: |
       npm install
       npm run build
+      mkdir -p $(Build.SourcesDirectory)/frontend/.next/standalone/.next/static
+      cp $(Build.SourcesDirectory)/frontend/.next/static $(Build.SourcesDirectory)/frontend/.next/standalone/.next/static
     workingDirectory: 'frontend'
     
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Frontend Artifact'
   inputs:
-    PathtoPublish: '$(Build.SourcesDirectory)/frontend/.next'
+    PathtoPublish: '$(Build.SourcesDirectory)/frontend/.next/standalone'
     ArtifactName: 'frontend'
     publishLocation: 'Container'
-
-    
+    StoreAsTar: true
