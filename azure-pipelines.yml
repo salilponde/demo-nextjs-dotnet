@@ -40,7 +40,7 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Frontend Artifact'
   inputs:
-    PathtoPublish: '$(Build.SourcesDirectory)/frontend/out'
+    PathtoPublish: '$(Build.SourcesDirectory)/frontend/.next'
     ArtifactName: 'frontend'
     publishLocation: 'Container'
 
