@@ -36,6 +36,7 @@ steps:
       npm install
       npm run build
       mkdir -p $(Build.SourcesDirectory)/frontend/.next/standalone/.next/static
+      cp $(Build.SourcesDirectory)/frontend/web.config $(Build.SourcesDirectory)/frontend/.next/standalone
       cp -r $(Build.SourcesDirectory)/frontend/.next/static $(Build.SourcesDirectory)/frontend/.next/standalone/.next/static
     workingDirectory: 'frontend'
     
