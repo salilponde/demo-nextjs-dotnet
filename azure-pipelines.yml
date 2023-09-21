@@ -35,13 +35,22 @@ steps:
     script: |
       npm install
       npm run build
+      mkdir -p $(Build.SourcesDirectory)/frontend/.next/standalone/.next/static
+      cp -r $(Build.SourcesDirectory)/frontend/.next/static $(Build.SourcesDirectory)/frontend/.next/standalone/.next/static
     workingDirectory: 'frontend'
     
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.SourcesDirectory)/frontend/.next/standalone'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/frontend.zip'
+    replaceExistingArchive: true
+
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Frontend Artifact'
   inputs:
-    PathtoPublish: '$(Build.SourcesDirectory)/frontend/.next'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/frontend.zip'
     ArtifactName: 'frontend'
     publishLocation: 'Container'
-
     
