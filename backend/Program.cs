@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
     var services = builder.Services;
     var env = builder.Environment;
  
+    services.AddOpenApiDocument();
     services.AddCors();
     services.AddControllers().AddJsonOptions(x =>
     {
@@ -51,6 +52,9 @@ var app = builder.Build();
     app.UseMiddleware<ErrorHandlerMiddleware>();
 
     app.MapControllers();
+
+    app.UseOpenApi();
+    app.UseSwaggerUi3();
 }
 
 app.Run();
