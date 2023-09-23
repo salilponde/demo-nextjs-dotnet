@@ -11,15 +11,15 @@ steps:
     command: 'publish'
     publishWebProjects: false
     projects: '**/WebApi.csproj'
-    arguments: '-o $(Build.ArtifactStagingDirectory)/Output'
+    arguments: '-o $(Build.ArtifactStagingDirectory)/WebApi'
     zipAfterPublish: true
     modifyOutputPath: true
     
 - task: PublishBuildArtifacts@1
   displayName: 'Publish WebApi Artifact'
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)/Output'
-    ArtifactName: 'backend'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/WebApi'
+    ArtifactName: 'WebApi'
     publishLocation: 'Container'
     
 - task: DotNetCoreCLI@2
@@ -38,6 +38,23 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)/QueueRequestFunction'
     ArtifactName: 'QueueRequestFunction'
     publishLocation: 'Container'    
+
+- task: DotNetCoreCLI@2
+  displayName: 'Publish ProcessRequestFunction'
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    projects: '**/ProcessRequestFunction.csproj'
+    arguments: '-o $(Build.ArtifactStagingDirectory)/ProcessRequestFunction'
+    zipAfterPublish: true
+    modifyOutputPath: true
+    
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish ProcessRequestFunction Artifact'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/ProcessRequestFunction'
+    ArtifactName: 'ProcessRequestFunction'
+    publishLocation: 'Container'   
     
 - task: Bash@3
   displayName: 'Build Frontend'
@@ -51,6 +68,7 @@ steps:
     workingDirectory: 'frontend'
     
 - task: ArchiveFiles@2
+  displayName: 'Archive Frontend'
   inputs:
     rootFolderOrFile: '$(Build.SourcesDirectory)/frontend/.next/standalone'
     includeRootFolder: false
