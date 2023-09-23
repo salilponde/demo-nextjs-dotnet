@@ -16,17 +16,28 @@ steps:
     modifyOutputPath: true
     
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish Backend Artifact'
+  displayName: 'Publish WebApi Artifact'
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)/Output'
     ArtifactName: 'backend'
     publishLocation: 'Container'
     
-# - task: NodeTool@0
-#   displayName: 'Install NodeJS'
-#   inputs:
-#     versionSource: 'spec'
-#     versionSpec: '18.12.0'
+- task: DotNetCoreCLI@2
+  displayName: 'Publish QueueRequestFunction'
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    projects: '**/QueueRequestFunction.csproj'
+    arguments: '-o $(Build.ArtifactStagingDirectory)/QueueRequestFunction'
+    zipAfterPublish: true
+    modifyOutputPath: true
+    
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish QueueRequestFunction Artifact'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/QueueRequestFunction'
+    ArtifactName: 'QueueRequestFunction'
+    publishLocation: 'Container'    
     
 - task: Bash@3
   displayName: 'Build Frontend'
