@@ -6,11 +6,11 @@ import process from 'process'
 export default function Home() {
   let [users, setUsers] = useState([])
 
-  // useEffect(() => {
-    // fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`)
-      // .then(response => response.json())
-      // .then(data => setUsers(data))
-  // });
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`)
+      .then(response => response.json())
+      .then(data => setUsers(data))
+  }, []);
 
   return (
     <div>

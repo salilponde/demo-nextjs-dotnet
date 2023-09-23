@@ -36,7 +36,7 @@ steps:
       npm install
       npm run build
       mkdir -p $(Build.SourcesDirectory)/frontend/.next/standalone/.next/static
-      cp -r $(Build.SourcesDirectory)/frontend/.next/static $(Build.SourcesDirectory)/frontend/.next/standalone/.next/static
+      cp -r $(Build.SourcesDirectory)/frontend/.next/static/* $(Build.SourcesDirectory)/frontend/.next/standalone/.next/static
     workingDirectory: 'frontend'
     
 - task: ArchiveFiles@2
