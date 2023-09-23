@@ -2,16 +2,15 @@ namespace WebApi.Helpers;
 
 using System.Data;
 using Dapper;
-using Microsoft.Extensions.Options;
 using Npgsql;
 
 public class DataContext
 {
     private DbSettings _dbSettings;
 
-    public DataContext(IOptions<DbSettings> dbSettings)
+    public DataContext(DbSettings dbSettings)
     {
-        _dbSettings = dbSettings.Value;
+        _dbSettings = dbSettings;
     }
 
     public IDbConnection CreateConnection()

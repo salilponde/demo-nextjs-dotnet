@@ -6,11 +6,11 @@ pool:
 
 steps:
 - task: DotNetCoreCLI@2
-  displayName: 'dotnet publish'
+  displayName: 'Publish WebApi'
   inputs:
     command: 'publish'
     publishWebProjects: false
-    projects: '**/*.csproj'
+    projects: '**/WebApi.csproj'
     arguments: '-o $(Build.ArtifactStagingDirectory)/Output'
     zipAfterPublish: true
     modifyOutputPath: true
